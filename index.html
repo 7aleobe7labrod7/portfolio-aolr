@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Obed Labbé - Developer & Tech Expert</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --neon-green: #00ff41;
+            --dark-bg: #0a0a0a;
+            --light-bg: #1a1a1a;
+            --white: #ffffff;
+            --gray: #333333;
+            --purple: #bf00ff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--dark-bg);
+            color: var(--white);
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 255, 65, 0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--neon-green);
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--gray) 100%);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            background: linear-gradient(90deg, var(--neon-green), var(--white), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            color: var(--neon-green);
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+            margin: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--neon-green);
+            color: var(--dark-bg);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--neon-green);
+            border: 2px solid var(--neon-green);
+        }
+
+        .btn-secondary:hover {
+            background: var(--neon-green);
+            color: var(--dark-bg);
+        }
+
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--neon-green);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--light-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 65, 0.2);
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-green);
+            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.2);
+        }
+
+        .project-card {
+            background: var(--light-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 255, 65, 0.1);
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-green);
+            box-shadow: 0 20px 40px rgba(0, 255, 65, 0.2);
+        }
+
+        .project-image {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            color: var(--neon-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .tech-badge {
+            display: inline-block;
+            background: var(--gray);
+            color: var(--neon-green);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin: 0.2rem;
+            border: 1px solid var(--neon-green);
+        }
+
+        .tag {
+            display: inline-block;
+            background: var(--gray);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            margin: 0.3rem;
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            transition: all 0.3s;
+        }
+
+        .tag:hover {
+            background: var(--neon-green);
+            color: var(--dark-bg);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--neon-green);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            background: var(--gray);
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            border-radius: 8px;
+            color: var(--white);
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: all 0.3s;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.5);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--neon-green);
+            text-decoration: none;
+            border: 2px solid var(--neon-green);
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background: var(--neon-green);
+            color: var(--dark-bg);
+            transform: translateY(-5px);
+        }
+
+        footer {
+            background: var(--light-bg);
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(0, 255, 65, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            nav ul {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#historia">Historia</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#proyectos">Proyectos</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <section id="inicio" class="hero">
+        <div>
+            <h1>Alex Obed Labbé</h1>
+            <h2>FullStack Developer | Tech Solutions Expert</h2>
+            <p>Transformando ideas en código y hardware en soluciones. Más de 12 años construyendo el futuro digital.</p>
+            <a href="#proyectos" class="btn btn-primary">Ver Proyectos</a>
+            <a href="#contacto" class="btn btn-secondary">Trabajemos Juntos</a>
+        </div>
+    </section>
+
+    <section id="historia">
+        <h2 class="section-title">Mi Trayectoria</h2>
+        <div class="grid">
+            <div class="card">
+                <h3 style="font-size: 2rem; color: var(--neon-green);">2012</h3>
+                <h4 style="margin: 1rem 0;">🐧 El Despertar Tech</h4>
+                <p>Comencé explorando Linux: Fedora, Debian, Ubuntu, Arch, Kali. Dominé terminal, SSH, servidores. El hardware se convirtió en mi lenguaje.</p>
+            </div>
+            <div class="card">
+                <h3 style="font-size: 2rem; color: var(--neon-green);">2016-2018</h3>
+                <h4 style="margin: 1rem 0;">🎓 El Estratega</h4>
+                <p>MBA en la Universidad de Chile. Lean Startup, mapas de valor, diseño de producto. La tecnología necesita estrategia.</p>
+            </div>
+            <div class="card">
+                <h3 style="font-size: 2rem; color: var(--neon-green);">2020</h3>
+                <h4 style="margin: 1rem 0;">💻 La Reinvención</h4>
+                <p>Me reconstruí como desarrollador fullstack. Java, Ruby on Rails, JavaScript, Python, PHP, C. Frontend, backend, bases de datos.</p>
+            </div>
+            <div class="card">
+                <h3 style="font-size: 2rem; color: var(--neon-green);">2025</h3>
+                <h4 style="margin: 1rem 0;">🚀 El Presente</h4>
+                <p>Beca Google en Cloud, IA, Ciberseguridad. Ingeniero Informático. Certificado Ruby on Rails. Fundador de Robotx.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2 class="section-title">Arsenal Tecnológico</h2>
+        <div class="grid">
+            <div class="card">
+                <h3 style="color: var(--neon-green);">💻 Desarrollo FullStack</h3>
+                <div style="margin-top: 1rem;">
+                    <span class="tag">Java</span>
+                    <span class="tag">Ruby on Rails</span>
+                    <span class="tag">JavaScript</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">PHP</span>
+                    <span class="tag">C</span>
+                    <span class="tag">React</span>
+                </div>
+            </div>
+            <div class="card">
+                <h3 style="color: var(--neon-green);">🗄️ Bases de Datos</h3>
+                <div style="margin-top: 1rem;">
+                    <span class="tag">PostgreSQL</span>
+                    <span class="tag">MySQL</span>
+                    <span class="tag">MongoDB</span>
+                    <span class="tag">SQL</span>
+                    <span class="tag">NoSQL</span>
+                </div>
+            </div>
+            <div class="card">
+                <h3 style="color: var(--neon-green);">🐧 Sistemas</h3>
+                <div style="margin-top: 1rem;">
+                    <span class="tag">Linux</span>
+                    <span class="tag">Ubuntu</span>
+                    <span class="tag">Debian</span>
+                    <span class="tag">SSH</span>
+                    <span class="tag">Servidores</span>
+                </div>
+            </div>
+            <div class="card">
+                <h3 style="color: var(--neon-green);">🔧 Hardware</h3>
+                <div style="margin-top: 1rem;">
+                    <span class="tag">Reparación PC</span>
+                    <span class="tag">Laptops</span>
+                    <span class="tag">Mantenimiento</span>
+                    <span class="tag">Diagnóstico</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="proyectos">
+        <h2 class="section-title">Proyectos Destacados</h2>
+        <div class="grid">
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #1a1a1a, #2d2d2d);">🛒</div>
+                <div class="project-content">
+                    <h3 class="project-title">Tech Store</h3>
+                    <p>E-commerce completo con carrito de compras y catálogo en línea.</p>
+                    <div style="margin: 1rem 0;">
+                        <span class="tech-badge">Rails</span>
+                        <span class="tech-badge">PostgreSQL</span>
+                        <span class="tech-badge">Bootstrap</span>
+                    </div>
+                    <a href="https://github.com/7aleobe7labrod7/tech_store" target="_blank" style="color: var(--neon-green);">Ver en GitHub →</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #00ff41, #00cc33);">🤖</div>
+                <div class="project-content">
+                    <h3 class="project-title">Robotx</h3>
+                    <p>Plataforma integral para servicios de hardware y desarrollo de software.</p>
+                    <div style="margin: 1rem 0;">
+                        <span class="tech-badge">Rails</span>
+                        <span class="tech-badge">JavaScript</span>
+                        <span class="tech-badge">SEO</span>
+                    </div>
+                    <a href="https://github.com/7aleobe7labrod7/robotx" target="_blank" style="color: var(--neon-green);">Ver en GitHub →</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #00d9b8, #00a896);">💡</div>
+                <div class="project-content">
+                    <h3 class="project-title">Eureka ID</h3>
+                    <p>Centro de salud organizacional con sistema de cotización de exámenes médicos.</p>
+                    <div style="margin: 1rem 0;">
+                        <span class="tech-badge">Rails</span>
+                        <span class="tech-badge">Forms</span>
+                        <span class="tech-badge">WhatsApp</span>
+                    </div>
+                    <a href="https://github.com/7aleobe7labrod7/eurekaid" target="_blank" style="color: var(--neon-green);">Ver en GitHub →</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #dc143c, #a01020);">🏢</div>
+                <div class="project-content">
+                    <h3 class="project-title">HRB Business</h3>
+                    <p>Sitio corporativo de recursos humanos con servicios de reclutamiento.</p>
+                    <div style="margin: 1rem 0;">
+                        <span class="tech-badge">HTML5</span>
+                        <span class="tech-badge">CSS3</span>
+                        <span class="tech-badge">JavaScript</span>
+                    </div>
+                    <a href="https://github.com/7aleobe7labrod7/2024-HRB-site" target="_blank" style="color: var(--neon-green);">Ver en GitHub →</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #7c3aed, #5b21b6);">🧠</div>
+                <div class="project-content">
+                    <h3 class="project-title">Evaluación Psicológica</h3>
+                    <p>Aplicación nativa para evaluaciones psicológicas profesionales.</p>
+                    <div style="margin: 1rem 0;">
+                        <span class="tech-badge">React Native</span>
+                        <span class="tech-badge">MongoDB</span>
+                        <span class="tech-badge">Node.js</span>
+                    </div>
+                    <a href="https://github.com/7aleobe7labrod7/evaluacionPsicoNativ1" target="_blank" style="color: var(--neon-green);">Ver en GitHub →</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #f59e0b, #d97706);">✈️</div>
+                <div class="project-content">
+                    <h3 class="project-title">App Viajes</h3>
+                    <p>Aplicación de gestión de viajes con reservas e itinerarios.</p>
+                    <div style="margin: 1rem 0;">
+                        <span class="tech-badge">React Native</span>
+                        <span class="tech-badge">API REST</span>
+                        <span class="tech-badge">Firebase</span>
+                    </div>
+                    <a href="https://github.com/7aleobe7labrod7/appViajes" target="_blank" style="color: var(--neon-green);">Ver en GitHub →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto">
+        <h2 class="section-title">Construyamos Algo Increíble</h2>
+        <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">¿Tienes un proyecto? ¿Necesitas reparar tu equipo? ¿Quieres digitalizar tu negocio?</p>
+            
+            <div class="social-links">
+                <a href="https://web.facebook.com/profile.php?id=61567990816309" target="_blank" class="social-link">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                </a>
+                <a href="https://www.instagram.com/robotx_cl" target="_blank" class="social-link">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                </a>
+                <a href="https://github.com/7aleobe7labrod7" target="_blank" class="social-link">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+                <a href="mailto:clientes@robotx.cl" class="social-link">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                </a>
+            </div>
+
+            <a href="https://wa.me/56962874464?text=Hola%20Alex,%20me%20gustaría%20conversar%20sobre%20un%20proyecto" target="_blank" class="whatsapp-btn">
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                </svg>
+                Chatea por WhatsApp
+            </a>
+
+            <div style="background: var(--light-bg); padding: 2rem; border-radius: 15px; margin-top: 3rem; border: 1px solid rgba(0, 255, 65, 0.2);">
+                <h3 style="color: var(--neon-green); margin-bottom: 1.5rem;">Cotiza tu Proyecto</h3>
+                <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                    <input type="hidden" name="form-name" value="contact">
+                    <div class="form-group">
+                        <label>Nombre Completo *</label>
+                        <input type="text" name="name" required placeholder="Tu nombre">
+                    </div>
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" name="email" required placeholder="tu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Teléfono</label>
+                        <input type="tel" name="phone" placeholder="+56 9 1234 5678">
+                    </div>
+                    <div class="form-group">
+                        <label>Servicio de Interés *</label>
+                        <select name="service" required>
+                            <option value="">Selecciona un servicio...</option>
+                            <optgroup label="💻 Desarrollo">
+                                <option value="desarrollo-web">Desarrollo Web / Landing Page</option>
+                                <option value="desarrollo-app">Desarrollo de Aplicaciones Móviles</option>
+                                <option value="ecommerce">E-commerce / Tienda Online</option>
+                                <option value="sistema-corporativo">Sistema Corporativo a Medida</option>
+                                <option value="api-integracion">APIs e Integraciones</option>
+                                <option value="bases-datos">Creación y Mantenimiento de Bases de Datos</option>
+                                <option value="backend">Desarrollo Backend</option>
+                                <option value="frontend">Desarrollo Frontend</option>
+                            </optgroup>
+                            <optgroup label="🔧 Hardware & Soporte">
+                                <option value="reparacion-pc">Reparación de PC Desktop</option>
+                                <option value="reparacion-laptop">Reparación de Laptop</option>
+                                <option value="mantenimiento">Mantenimiento Preventivo</option>
+                                <option value="upgrade">Upgrade de Equipos</option>
+                                <option value="venta-hardware">Venta de Hardware Nuevo/Usado</option>
+                                <option value="instalacion-software">Instalación de Software</option>
+                                <option value="recuperacion-datos">Recuperación de Datos</option>
+                            </optgroup>
+                            <optgroup label="🎯 Consultoría & Soporte">
+                                <option value="consultoria-tech">Consultoría Tecnológica</option>
+                                <option value="digitalizacion">Digitalización de Negocio</option>
+                                <option value="soporte-ti">Soporte TI Empresarial</option>
+                                <option value="migracion-cloud">Migración a Cloud</option>
+                                <option value="optimizacion">Optimización de Sistemas</option>
+                            </optgroup>
+                            <option value="otro">Otro Servicio</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Mensaje *</label>
+                        <textarea name="message" required placeholder="Cuéntame sobre tu proyecto o necesidad... ¿Qué problema buscas resolver?"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar Cotización</button>
+                </form>
+                <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(0, 255, 65, 0.2);">
+                    <p style="font-size: 0.9rem; opacity: 0.8;">O contáctame directamente:</p>
+                    <p style="color: var(--neon-green); font-weight: 600; margin-top: 0.5rem;">
+                        📧 clientes@robotx.cl<br>
+                        📱 +56 9 6287 4464
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Alex Obed Labbé Rodríguez - FullStack Developer & Tech Solutions Expert</p>
+        <p style="margin-top: 0.5rem;">Robotx | Ingeniero Informático | MBA Universidad de Chile</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+            <a href="https://www.robotx.cl" target="_blank" style="color: var(--neon-green); text-decoration: none;">www.robotx.cl</a> | 
+            <a href="mailto:clientes@robotx.cl" style="color: var(--neon-green); text-decoration: none;">clientes@robotx.cl</a> | 
+            <a href="https://wa.me/56962874464" target="_blank" style="color: var(--neon-green); text-decoration: none;">WhatsApp: +56 9 6287 4464</a>
+        </p>
+        <div style="margin-top: 1rem;">
+            <a href="https://web.facebook.com/profile.php?id=61567990816309" target="_blank" style="color: var(--neon-green); margin: 0 0.5rem; text-decoration: none;">Facebook</a>
+            <a href="https://www.instagram.com/robotx_cl" target="_blank" style="color: var(--neon-green); margin: 0 0.5rem; text-decoration: none;">Instagram</a>
+            <a href="https://www.tiktok.com/@robotx_cl" target="_blank" style="color: var(--neon-green); margin: 0 0.5rem; text-decoration: none;">TikTok</a>
+            <a href="https://github.com/7aleobe7labrod7" target="_blank" style="color: var(--neon-green); margin: 0 0.5rem; text-decoration: none;">GitHub</a>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Active nav links
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.color = '';
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.style.color = 'var(--neon-green)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
